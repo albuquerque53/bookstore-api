@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  go:
+    image: golang:1.16
+    container_name: bookstore_api
+    working_dir: /opt/app/api
+    volumes:
+      - ../:/opt/app/api
+    command: tail -f /dev/null
