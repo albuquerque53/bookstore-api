@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"bookstore_api/app/router"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	router.HandleRequests()
 }
