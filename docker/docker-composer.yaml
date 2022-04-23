@@ -8,3 +8,5 @@ services:
     volumes:
       - ../:/opt/app/api
     command: tail -f /dev/null
+    ports:
+      - "2001:2001"
