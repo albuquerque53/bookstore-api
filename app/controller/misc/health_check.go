@@ -1,11 +1,15 @@
 package misc
 
 import (
-	"fmt"
+	"bookstore_api/app/writer"
 	"net/http"
 )
 
 // Returns a "Hello, World" message, to check if server is on
 func HealthCheck(response http.ResponseWriter, request *http.Request) {
-	fmt.Println("Hello, World!")
+	jsonWriter := writer.NewMessageWriter("Hello, World!")
+
+	reponseBody, _ := jsonWriter.JSONString()
+
+	response.Write([]byte(reponseBody))
 }
