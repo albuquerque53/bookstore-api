@@ -19,11 +19,7 @@ func ToJSON(message string) (string, error) {
 func buildJsonData(message JsonMessage) (string, error) {
 	structData := JsonData{Data: message}
 
-	jsonData, err := json.Marshal(structData)
-
-	if err != nil {
-		return "", err
-	}
+	jsonData, _ := json.Marshal(structData)
 
 	return string(jsonData), nil
 }
