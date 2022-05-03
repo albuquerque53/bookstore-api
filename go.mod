@@ -1,4 +1,4 @@
-module bookstore_api
+module bookstoreapi
 
 go 1.16
 

@@ -1,7 +1,7 @@
 package router
 
 import (
-	"bookstore_api/app/controller/misc"
+	"bookstoreapi/internal/application/handler/misc"
 	"log"
 	"net/http"
 )

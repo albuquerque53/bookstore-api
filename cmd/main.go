@@ -1,8 +1,6 @@
 package main
 
-import (
-	"bookstore_api/app/router"
-)
+import "bookstoreapi/internal/application/router"
 
 func main() {
 	router.HandleRequests()

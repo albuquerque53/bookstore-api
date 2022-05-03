@@ -1,7 +1,7 @@
 package misc
 
 import (
-	"bookstore_api/app/writer"
+	"bookstoreapi/internal/application/writer"
 	"net/http"
 )
 
