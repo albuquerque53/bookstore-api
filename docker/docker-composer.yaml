@@ -8,5 +8,28 @@ services:
     volumes:
       - ../:/opt/app/api
     command: tail -f /dev/null
+    environment:
+      MYSQL_HOST: 'mysql'
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
       - "2001:2001"
+
+  mysql:
+    container_name: bookstore_db 
+    image: mysql:5.7
+    stdin_open: true
+    tty: true
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - boostore_db_volume:/var/lib/mysql
+    restart: always
+
+volumes:
+  boostore_db_volume:
