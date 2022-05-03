@@ -16,9 +16,7 @@ type MockedJsonMessage struct {
 func TestJSONString(t *testing.T) {
 	expectedMessage := "Hello, World!"
 
-	messageWriter := NewMessageWriter(expectedMessage)
-
-	jsonString, err := messageWriter.JSONString()
+	jsonString, err := ToJSON(expectedMessage)
 
 	if err != nil {
 		t.Errorf("could not generate JSON by JSONString method by the following error: %v", err)

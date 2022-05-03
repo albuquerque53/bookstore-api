@@ -2,28 +2,28 @@ package writer
 
 import "encoding/json"
 
-type JsonMessageWriter struct {
+type JsonData struct {
+	Data JsonMessage `json:"data"`
+}
+
+type JsonMessage struct {
 	Message string `json:"message"`
 }
 
-func NewMessageWriter(message string) *JsonMessageWriter {
-	return &JsonMessageWriter{
-		Message: message,
-	}
+func ToJSON(message string) (string, error) {
+	messageStruct := JsonMessage{Message: message}
+
+	return buildJsonData(messageStruct)
 }
 
-func (message *JsonMessageWriter) JSONString() (string, error) {
-	messageResponse := map[string]interface{}{
-		"data": map[string]string{
-			"message": message.Message,
-		},
-	}
+func buildJsonData(message JsonMessage) (string, error) {
+	structData := JsonData{Data: message}
 
-	bytesValue, err := json.Marshal(messageResponse)
+	jsonData, err := json.Marshal(structData)
 
 	if err != nil {
 		return "", err
 	}
 
-	return string(bytesValue), nil
+	return string(jsonData), nil
 }
