@@ -1,9 +1,9 @@
 up:
-	docker-compose --file docker/docker-composer.yaml up -d
+	docker-compose --file docker/docker-composer.yml up -d
 down:
-	docker-compose --file docker/docker-composer.yaml down
+	docker-compose --file docker/docker-composer.yml down
 status:
-	docker-compose --file docker/docker-composer.yaml ps
+	docker-compose --file docker/docker-composer.yml ps
 api:
 	docker exec -it bookstore_api bash
 run:
