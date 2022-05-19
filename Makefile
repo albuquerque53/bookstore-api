@@ -1,4 +1,5 @@
 .SILENT: migrateup
+.SILENT: migratedown
 up:
 	docker-compose --file build/docker-composer.yml up -d
 down:
