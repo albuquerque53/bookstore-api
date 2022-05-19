@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.3'
 
 services:
   go:
@@ -17,18 +17,20 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
-      - "2001:2001"
+      - '2001:2001' 
 
   mysql:
-    container_name: bookstore_db 
     image: mysql:5.7
-    stdin_open: true
-    tty: true
+    container_name: bookstore_db 
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
     volumes:
       - boostore_db_volume:/var/lib/mysql
     restart: always
