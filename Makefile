@@ -7,4 +7,4 @@ status:
 api:
 	docker exec -it bookstore_api bash
 run:
-	go run cmd/main.go
+	cd cmd && air
