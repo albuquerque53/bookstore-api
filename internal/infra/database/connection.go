@@ -8,7 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func ConectToDatabase() {
+func ConectToDatabase() *sql.DB {
 	dsn := BuildDsn()
 
 	db, err := sql.Open("mysql", dsn)
@@ -24,4 +24,6 @@ func ConectToDatabase() {
 	}
 
 	fmt.Println("Connected to Database!")
+
+	return db
 }
