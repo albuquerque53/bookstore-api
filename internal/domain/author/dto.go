@@ -1,4 +1,4 @@
-package dto
+package author
 
 type AuthorDto struct {
 	ID        int    `json:id`
