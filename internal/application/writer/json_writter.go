@@ -7,10 +7,10 @@ type JsonData struct {
 }
 
 type JsonMessage struct {
-	Message string `json:"message"`
+	Message interface{} `json:"message"`
 }
 
-func ToJSON(message string) (string, error) {
+func ToJSON(message interface{}) (string, error) {
 	messageStruct := JsonMessage{Message: message}
 
 	return buildJsonData(messageStruct)
