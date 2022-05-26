@@ -58,3 +58,9 @@ func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*author.AuthorDto, error)
 
 	return dtos, nil
 }
+
+func (repo *AuthorRepo) Save(ctx context.Context, dto *author.AuthorDto) error {
+	_, err := repo.db.Query(ctx, "insert into authors(name) values(?)", dto.Name)
+
+	return err
+}
