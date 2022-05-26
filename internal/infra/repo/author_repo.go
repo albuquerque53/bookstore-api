@@ -1,7 +1,7 @@
 package repo
 
 import (
-	"bookstoreapi/internal/domain/dto"
+	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/database"
 	"context"
 )
@@ -16,14 +16,14 @@ func NewAuthorRepo() *AuthorRepo {
 	}
 }
 
-func (repo *AuthorRepo) Get(ctx context.Context, id int) (*dto.AuthorDto, error) {
-	row, err := repo.db.QueryRow(ctx, "select id, name from users where id=?", id)
+func (repo *AuthorRepo) Get(ctx context.Context, id int) (*author.AuthorDto, error) {
+	row, err := repo.db.QueryRow(ctx, "select id, name from authors where id=?", id)
 
 	if err != nil {
 		return nil, err
 	}
 
-	dto := &dto.AuthorDto{}
+	dto := &author.AuthorDto{}
 	err = row.Scan(&dto.ID, &dto.Name)
 
 	if err != nil {
@@ -33,8 +33,8 @@ func (repo *AuthorRepo) Get(ctx context.Context, id int) (*dto.AuthorDto, error)
 	return dto, nil
 }
 
-func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*dto.AuthorDto, error) {
-	rows, err := repo.db.Query(ctx, "select id, name from users")
+func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*author.AuthorDto, error) {
+	rows, err := repo.db.Query(ctx, "select id, name from authors")
 
 	if err != nil {
 		return nil, err
@@ -42,10 +42,10 @@ func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*dto.AuthorDto, error) {
 
 	defer rows.Close()
 
-	dtos := make([]*dto.AuthorDto, 0)
+	dtos := make([]*author.AuthorDto, 0)
 
 	for rows.Next() {
-		dto := &dto.AuthorDto{}
+		dto := &author.AuthorDto{}
 
 		err = rows.Scan(&dto.ID, &dto.Name)
 
