@@ -17,8 +17,6 @@ func ConectToDatabase() *sql.DB {
 		log.Fatalf("unexpected error on database connection: %v", err)
 	}
 
-	defer db.Close()
-
 	if err = db.Ping(); err != nil {
 		log.Fatalf("unexpected error on database ping: %v", err)
 	}
