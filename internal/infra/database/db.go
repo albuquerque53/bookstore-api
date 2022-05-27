@@ -40,5 +40,5 @@ func (dm *DatabaseManager) QueryRow(ctx context.Context, q string, args ...inter
 
 	defer stmt.Close()
 
-	return stmt.QueryRowContext(ctx, args), nil
+	return stmt.QueryRowContext(ctx, args...), nil
 }
