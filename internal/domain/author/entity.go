@@ -19,7 +19,7 @@ func (ent *AuthorEntity) GetAuthorById(ctx context.Context, id int) *AuthorDto {
 	author, err := ent.repo.Get(ctx, id)
 
 	if err != nil {
-		log.Fatal("error on author search")
+		log.Fatalf("error on author search: %s", err)
 	}
 
 	return author
