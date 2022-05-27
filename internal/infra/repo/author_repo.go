@@ -17,14 +17,14 @@ func NewAuthorRepo() *AuthorRepo {
 }
 
 func (repo *AuthorRepo) Get(ctx context.Context, id int) (*author.AuthorDto, error) {
-	row, err := repo.db.QueryRow(ctx, "select id, name from authors where id=?", id)
+	row, err := repo.db.QueryRow(ctx, "select id, name, created_at, updated_at from authors where id=?", id)
 
 	if err != nil {
 		return nil, err
 	}
 
 	dto := &author.AuthorDto{}
-	err = row.Scan(&dto.ID, &dto.Name)
+	err = row.Scan(&dto.ID, &dto.Name, &dto.CreatedAt, &dto.UpdatedAt)
 
 	if err != nil {
 		return nil, err
@@ -34,7 +34,7 @@ func (repo *AuthorRepo) Get(ctx context.Context, id int) (*author.AuthorDto, err
 }
 
 func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*author.AuthorDto, error) {
-	rows, err := repo.db.Query(ctx, "select id, name from authors")
+	rows, err := repo.db.Query(ctx, "select id, name, created_at, updated_at from authors")
 
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (repo *AuthorRepo) GetAll(ctx context.Context) ([]*author.AuthorDto, error)
 	for rows.Next() {
 		dto := &author.AuthorDto{}
 
-		err = rows.Scan(&dto.ID, &dto.Name)
+		err = rows.Scan(&dto.ID, &dto.Name, &dto.CreatedAt, &dto.UpdatedAt)
 
 		if err != nil {
 			return nil, err
