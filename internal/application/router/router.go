@@ -11,6 +11,7 @@ import (
 func HandleRequests() {
 	http.HandleFunc("/health", misc.HealthCheck)
 	http.HandleFunc("/authors/list", author.ListAuthors)
+	http.HandleFunc("/authors/get/", author.GetAuthor)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
