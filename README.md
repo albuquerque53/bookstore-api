@@ -2,22 +2,7 @@
 
 > An API for a fictionary library's management
 
-## How to use this?
+## To-DO (Authors)
 
-1. You need build and up the application containers:
-
-```sh
-make up
-```
-
-2. This API is developed in Go, to get into Go container, do:
-
-```sh
-make api
-```
-
-3. Now, simply run the application:
-
-```sh
-make run
-```
+- [ ] Fix the migrations file to autoincrement `created_at` and `updated_at`.
+- [ ] Fix the case in the fields of authors search (list and get) return (expected `"id"`, `"name"`, `"created_at"` and `"updated_at"`).
