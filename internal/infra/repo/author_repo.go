@@ -64,3 +64,9 @@ func (repo *AuthorRepo) Save(ctx context.Context, dto *author.AuthorDto) error {
 
 	return err
 }
+
+func (repo *AuthorRepo) Delete(ctx context.Context, id int) error {
+	_, err := repo.db.Query(ctx, "delete from authors where id = ?", id)
+
+	return err
+}
