@@ -1,6 +1,7 @@
 package author
 
 import (
+	"bookstoreapi/internal/application/helper"
 	"bookstoreapi/internal/application/writer"
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
@@ -37,10 +38,8 @@ func getRequestBody(w http.ResponseWriter, req *http.Request) (*author.AuthorDto
 
 	err := decoder.Decode(&dto)
 	if err != nil {
-		writer.SendResponse(w, 400, writer.JSONResponse{
-			Message: "error",
-			Data:    "invalid request body",
-		})
+		helper.HandleHttpError(w, 400, "invalid fields", nil)
+
 		return nil, err
 	}
 

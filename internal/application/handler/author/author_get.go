@@ -1,6 +1,7 @@
 package author
 
 import (
+	"bookstoreapi/internal/application/helper"
 	"bookstoreapi/internal/application/writer"
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
@@ -36,11 +37,7 @@ func getAuthorId(w http.ResponseWriter, urlPath string) (int, error) {
 	id, err := strconv.Atoi(strId)
 
 	if err != nil {
-		writer.SendResponse(w, 400, writer.JSONResponse{
-			Message: "error",
-			Data:    "invalid author ID",
-		})
-
+		helper.HandleHttpError(w, 400, "invalid fields", nil)
 		return 0, err
 	}
 
