@@ -3,33 +3,77 @@ package writer
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
-type sceneries struct {
-	messageSent JsonResponse
+type sendResponseSceneries struct {
+	sentStatus       uint
+	sentResponseJSON JSONResponse
 }
 
-func TestJSONString(t *testing.T) {
-	testSceneries := []sceneries{
-		{JsonResponse{Message: "ok", Data: "ok"}},
-		{JsonResponse{Message: "ok", Data: 1}},
-		{JsonResponse{Message: "ok", Data: map[string]string{"hello": "world"}}},
-		{JsonResponse{Message: "olááá", Data: "@!#!@#1"}},
-		{JsonResponse{Message: "''", Data: ""}},
+func TestSendResponse(t *testing.T) {
+	testSceneries := []sendResponseSceneries{
+		{
+			sentStatus:       200,
+			sentResponseJSON: JSONResponse{Message: "ok", Data: "ok"},
+		},
+		{
+			sentStatus:       200,
+			sentResponseJSON: JSONResponse{Message: "ok", Data: map[string]string{"hello": "world"}},
+		},
+		{
+			sentStatus:       400,
+			sentResponseJSON: JSONResponse{Message: "ok", Data: 1},
+		},
+		{
+			sentStatus:       200,
+			sentResponseJSON: JSONResponse{Message: "ok", Data: nil},
+		},
+		{
+			sentStatus:       500,
+			sentResponseJSON: JSONResponse{Message: "Olá Mundo!", Data: "!@#$%*()"},
+		},
+		{
+			sentStatus:       200,
+			sentResponseJSON: JSONResponse{Message: "''", Data: ""},
+		},
 	}
 
 	for _, scenery := range testSceneries {
-		jsonString, err := ToJSON(scenery.messageSent)
+		sentStatus := scenery.sentStatus
+		sentResp := scenery.sentResponseJSON
 
-		if err != nil {
-			t.Errorf("could not generate JSON by JSONString method by the following error: %v", err)
+		handler := func(w http.ResponseWriter, req *http.Request) {
+			SendResponse(w, sentStatus, sentResp)
 		}
 
-		expectedJsonString := buildExpectedJson(scenery.messageSent.Message, scenery.messageSent.Data)
+		req := httptest.NewRequest("POST", "/", nil)
+		w := httptest.NewRecorder()
+		handler(w, req)
 
-		if expectedJsonString != jsonString {
-			t.Errorf("the expected json (%v) does not match with returned (%v)", expectedJsonString, jsonString)
+		resp := w.Result()
+		respJSON, _ := io.ReadAll(resp.Body)
+
+		expectJSON := buildExpectedJson(sentResp.Message, sentResp.Data)
+
+		if expectJSON != string(respJSON) {
+			t.Errorf("expected JSON (%s) does not match with returned in test: %s", expectJSON, string(respJSON))
+		}
+
+		expectContType := "application/json"
+		contType := resp.Header.Get("Content-Type")
+
+		if expectContType != contType {
+			t.Errorf("expected Content-Type (%s) does not match with returned in test: %s", expectContType, contType)
+		}
+
+		status := resp.StatusCode
+
+		if int(sentStatus) != status {
+			t.Errorf("expected status code (%d) does not match with returned in test: %d", sentStatus, status)
 		}
 	}
 }
