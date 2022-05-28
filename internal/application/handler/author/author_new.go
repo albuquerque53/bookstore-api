@@ -1,28 +1,35 @@
 package author
 
 import (
+	"bookstoreapi/internal/application/writer"
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
 )
 
 func NewAuthor(w http.ResponseWriter, req *http.Request) {
 	ctx := context.Background()
 
-	dto := getRequestBody(req)
+	dto, err := getRequestBody(w, req)
+
+	if err != nil {
+		return
+	}
 
 	repo := repo.NewAuthorRepo()
 	authorEnt := author.NewAuthorEntity(repo)
 
 	authorEnt.CreateNewAuthor(ctx, dto)
 
-	w.WriteHeader(204)
+	writer.SendResponse(w, 204, writer.JSONResponse{
+		Message: "ok",
+		Data:    nil,
+	})
 }
 
-func getRequestBody(req *http.Request) *author.AuthorDto {
+func getRequestBody(w http.ResponseWriter, req *http.Request) (*author.AuthorDto, error) {
 	var dto *author.AuthorDto
 
 	decoder := json.NewDecoder(req.Body)
@@ -30,8 +37,12 @@ func getRequestBody(req *http.Request) *author.AuthorDto {
 
 	err := decoder.Decode(&dto)
 	if err != nil {
-		log.Fatalf("invalid request body :(")
+		writer.SendResponse(w, 400, writer.JSONResponse{
+			Message: "error",
+			Data:    "invalid request body",
+		})
+		return nil, err
 	}
 
-	return dto
+	return dto, nil
 }

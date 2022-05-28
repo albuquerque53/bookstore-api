@@ -5,7 +5,6 @@ import (
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
 	"context"
-	"log"
 	"net/http"
 )
 
@@ -17,11 +16,8 @@ func ListAuthors(w http.ResponseWriter, req *http.Request) {
 
 	authors := authorEnt.GetAllAuthors(ctx)
 
-	resp, err := writer.ToJSON(authors)
-
-	if err != nil {
-		log.Fatalf("error during authors list: %s", err)
-	}
-
-	w.Write([]byte(resp))
+	writer.SendResponse(w, 200, writer.JSONResponse{
+		Message: "ok",
+		Data:    authors,
+	})
 }

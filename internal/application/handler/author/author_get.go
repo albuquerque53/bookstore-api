@@ -5,7 +5,6 @@ import (
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
 	"context"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,30 +13,36 @@ import (
 func GetAuthor(w http.ResponseWriter, req *http.Request) {
 	ctx := context.Background()
 
-	id := getAuthorId(req.URL.Path)
+	id, err := getAuthorId(w, req.URL.Path)
+
+	if err != nil {
+		return
+	}
 
 	repo := repo.NewAuthorRepo()
 	authorEnt := author.NewAuthorEntity(repo)
 
-	authors := authorEnt.GetAuthorById(ctx, id)
+	author := authorEnt.GetAuthorById(ctx, id)
 
-	resp, err := writer.ToJSON(authors)
-
-	if err != nil {
-		log.Fatalf("error during authors list: %s", err)
-	}
-
-	w.Write([]byte(resp))
+	writer.SendResponse(w, 200, writer.JSONResponse{
+		Message: "ok",
+		Data:    author,
+	})
 }
 
-func getAuthorId(urlPath string) int {
+func getAuthorId(w http.ResponseWriter, urlPath string) (int, error) {
 	strId := strings.TrimPrefix(urlPath, "/authors/get/")
 
 	id, err := strconv.Atoi(strId)
 
 	if err != nil {
-		log.Fatalf("invalid author id :(")
+		writer.SendResponse(w, 400, writer.JSONResponse{
+			Message: "error",
+			Data:    "invalid author ID",
+		})
+
+		return 0, err
 	}
 
-	return id
+	return id, nil
 }
