@@ -14,6 +14,7 @@ func HandleRequests() {
 	route("/authors/list", author.ListAuthors)
 	route("/authors/get/", author.GetAuthor)
 	route("/authors/new", author.NewAuthor)
+	route("/authors/delete/", author.DeleteAuthor)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
