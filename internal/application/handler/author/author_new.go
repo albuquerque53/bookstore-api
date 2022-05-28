@@ -22,7 +22,11 @@ func NewAuthor(w http.ResponseWriter, req *http.Request) {
 	repo := repo.NewAuthorRepo()
 	authorEnt := author.NewAuthorEntity(repo)
 
-	authorEnt.CreateNewAuthor(ctx, dto)
+	err = authorEnt.CreateNewAuthor(ctx, dto)
+
+	if err != nil {
+		helper.HandleHttpError(w, 400, "error on author create", err)
+	}
 
 	writer.SendResponse(w, 204, writer.JSONResponse{
 		Message: "ok",
@@ -37,6 +41,7 @@ func getRequestBody(w http.ResponseWriter, req *http.Request) (*author.AuthorDto
 	decoder.DisallowUnknownFields()
 
 	err := decoder.Decode(&dto)
+
 	if err != nil {
 		helper.HandleHttpError(w, 400, "invalid fields", nil)
 

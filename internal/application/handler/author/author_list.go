@@ -1,6 +1,7 @@
 package author
 
 import (
+	"bookstoreapi/internal/application/helper"
 	"bookstoreapi/internal/application/writer"
 	"bookstoreapi/internal/domain/author"
 	"bookstoreapi/internal/infra/repo"
@@ -14,7 +15,12 @@ func ListAuthors(w http.ResponseWriter, req *http.Request) {
 	repo := repo.NewAuthorRepo()
 	authorEnt := author.NewAuthorEntity(repo)
 
-	authors := authorEnt.GetAllAuthors(ctx)
+	authors, err := authorEnt.GetAllAuthors(ctx)
+
+	if err != nil {
+		helper.HandleHttpError(w, 400, "error on authors list", err)
+		return
+	}
 
 	writer.SendResponse(w, 200, writer.JSONResponse{
 		Message: "ok",

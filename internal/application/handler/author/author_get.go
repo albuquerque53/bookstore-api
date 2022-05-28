@@ -23,7 +23,12 @@ func GetAuthor(w http.ResponseWriter, req *http.Request) {
 	repo := repo.NewAuthorRepo()
 	authorEnt := author.NewAuthorEntity(repo)
 
-	author := authorEnt.GetAuthorById(ctx, id)
+	author, err := authorEnt.GetAuthorById(ctx, id)
+
+	if err != nil {
+		helper.HandleHttpError(w, 400, "error on author search", err)
+		return
+	}
 
 	writer.SendResponse(w, 200, writer.JSONResponse{
 		Message: "ok",
@@ -38,6 +43,7 @@ func getAuthorId(w http.ResponseWriter, urlPath string) (int, error) {
 
 	if err != nil {
 		helper.HandleHttpError(w, 400, "invalid fields", nil)
+
 		return 0, err
 	}
 
