@@ -2,7 +2,6 @@ package author
 
 import (
 	"context"
-	"log"
 )
 
 type AuthorEntity struct {
@@ -15,30 +14,32 @@ func NewAuthorEntity(repo Repository) *AuthorEntity {
 	}
 }
 
-func (ent *AuthorEntity) GetAuthorById(ctx context.Context, id int) *AuthorDto {
+func (ent *AuthorEntity) GetAuthorById(ctx context.Context, id int) (*AuthorDto, error) {
 	author, err := ent.repo.Get(ctx, id)
 
 	if err != nil {
-		log.Fatalf("error on author search: %s", err)
+		return nil, err
 	}
 
-	return author
+	return author, nil
 }
 
-func (ent *AuthorEntity) GetAllAuthors(ctx context.Context) []*AuthorDto {
+func (ent *AuthorEntity) GetAllAuthors(ctx context.Context) ([]*AuthorDto, error) {
 	authors, err := ent.repo.GetAll(ctx)
 
 	if err != nil {
-		log.Fatalf("error on authors list: %s", err)
+		return nil, err
 	}
 
-	return authors
+	return authors, nil
 }
 
-func (ent *AuthorEntity) CreateNewAuthor(ctx context.Context, author *AuthorDto) {
+func (ent *AuthorEntity) CreateNewAuthor(ctx context.Context, author *AuthorDto) error {
 	err := ent.repo.Save(ctx, author)
 
 	if err != nil {
-		log.Fatal("error on author create")
+		return err
 	}
+
+	return nil
 }
