@@ -3,16 +3,21 @@ package router
 import (
 	"bookstoreapi/internal/application/handler/author"
 	"bookstoreapi/internal/application/handler/misc"
+	"bookstoreapi/internal/application/middleware"
 	"log"
 	"net/http"
 )
 
 // Must handle all trafic of API
 func HandleRequests() {
-	http.HandleFunc("/health", misc.HealthCheck)
-	http.HandleFunc("/authors/list", author.ListAuthors)
-	http.HandleFunc("/authors/get/", author.GetAuthor)
-	http.HandleFunc("/authors/new", author.NewAuthor)
+	route("/health", misc.HealthCheck)
+	route("/authors/list", author.ListAuthors)
+	route("/authors/get/", author.GetAuthor)
+	route("/authors/new", author.NewAuthor)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
+}
+
+func route(pattern string, handler func(http.ResponseWriter, *http.Request)) {
+	http.HandleFunc(pattern, middleware.PanicHandler(handler))
 }
