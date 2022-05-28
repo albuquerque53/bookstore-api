@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func PanicHandler(next http.Handler) http.Handler {
+func PanicHandler(next http.HandlerFunc) http.HandlerFunc {
 	fn := func(w http.ResponseWriter, req *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
