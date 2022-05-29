@@ -23,6 +23,7 @@ func HandleRequests() {
 	route("/categories/get/", category.GetCategory)
 	route("/categories/new", category.NewCategory)
 	route("/categories/edit/", category.UpdateCategory)
+	route("/categories/delete/", category.DeleteCategory)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
