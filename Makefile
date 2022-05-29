@@ -12,5 +12,7 @@ status:
 	docker-compose --file build/docker-composer.yml ps
 api:
 	docker exec -it bookstore_api bash
-run:
-	cd cmd && air
+test:
+	go test ./... 
+serve:
+	go run cmd/main.go
