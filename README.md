@@ -1,8 +1,46 @@
-# BookStore API
+# BookStore API 📚
 
 > An API for a fictionary library's management
 
-## To-DO (Authors)
+## Tecnical specification 🔍
 
-- [ ] Fix the migrations file to autoincrement `created_at` and `updated_at`.
-- [X] Fix the case in the fields of authors search (list and get) return (expected `"id"`, `"name"`, `"created_at"` and `"updated_at"`).
+- Simple CRUD for three repositories
+  - Authors
+  - Categories
+  - Books
+- Used the relational Database MySQL for this
+- All application environment is encapsuled into docker (see `docker` folder to understand)
+
+## Project set-up 🏗️
+
+1. Build the containers:
+
+```
+make up
+```
+
+2. Get into API container:
+
+```
+make api
+```
+
+3. Run the tests to make sure that everyting's all right:
+
+```
+make test
+```
+
+4. Run the migrations to create the database tables:
+
+```
+make migrateup
+```
+
+5. Still into container, you can run the application with:
+
+```
+make serve
+``` 
+
+6. The application is running on the default port `2001` in `localhost`
