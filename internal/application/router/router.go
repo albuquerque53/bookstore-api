@@ -20,6 +20,7 @@ func HandleRequests() {
 	route("/authors/delete/", author.DeleteAuthor)
 
 	route("/categories/list", category.ListCategories)
+	route("/categories/get/", category.GetCategory)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
