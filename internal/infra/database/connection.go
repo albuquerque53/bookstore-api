@@ -13,14 +13,12 @@ func ConectToDatabase() *sql.DB {
 	db, err := sql.Open("mysql", dsn)
 
 	if err != nil {
-		log.Fatalf("unexpected error on database connection: %v", err)
+		log.Panicf("unexpected error on database connection: %v", err)
 	}
 
 	if err = db.Ping(); err != nil {
-		log.Fatalf("unexpected error on database ping: %v", err)
+		log.Panicf("unexpected during database ping: %v", err)
 	}
-
-	fmt.Println("Connected to Database!")
 
 	return db
 }
