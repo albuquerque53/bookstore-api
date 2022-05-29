@@ -53,3 +53,13 @@ func (ent *AuthorEntity) DeleteAuthorById(ctx context.Context, id int) error {
 
 	return nil
 }
+
+func (ent *AuthorEntity) UpdateAuthorById(ctx context.Context, id int, author *AuthorDto) error {
+	err := ent.repo.Update(ctx, id, author)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
