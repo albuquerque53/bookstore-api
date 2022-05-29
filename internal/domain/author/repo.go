@@ -9,4 +9,5 @@ type Repository interface {
 	GetAll(ctx context.Context) ([]*AuthorDto, error)
 	Save(ctx context.Context, dto *AuthorDto) error
 	Delete(ctx context.Context, id int) error
+	Update(ctx context.Context, id int, dto *AuthorDto) error
 }

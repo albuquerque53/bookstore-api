@@ -70,3 +70,9 @@ func (repo *AuthorRepo) Delete(ctx context.Context, id int) error {
 
 	return err
 }
+
+func (repo *AuthorRepo) Update(ctx context.Context, id int, dto *author.AuthorDto) error {
+	_, err := repo.db.Query(ctx, "update authors set name = ? where id = ?", dto.Name, id)
+
+	return err
+}
