@@ -12,7 +12,7 @@ import (
 func GetAuthor(w http.ResponseWriter, req *http.Request) {
 	ctx := context.Background()
 
-	id, err := helper.GetAuthorId(w, req.URL.Path)
+	id, err := helper.GetPathId(w, req.URL.Path)
 
 	if err != nil {
 		return

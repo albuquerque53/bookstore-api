@@ -20,7 +20,7 @@ func HandleHttpError(w http.ResponseWriter, status uint, message string, data in
 	})
 }
 
-func GetAuthorId(w http.ResponseWriter, urlPath string) (int, error) {
+func GetPathId(w http.ResponseWriter, urlPath string) (int, error) {
 	re := regexp.MustCompile("[0-9]")
 	pref := re.ReplaceAllString(urlPath, "")
 
