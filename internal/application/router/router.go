@@ -21,6 +21,7 @@ func HandleRequests() {
 
 	route("/categories/list", category.ListCategories)
 	route("/categories/get/", category.GetCategory)
+	route("/categories/new", category.NewCategory)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
