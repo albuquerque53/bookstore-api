@@ -2,6 +2,7 @@ package router
 
 import (
 	"bookstoreapi/internal/application/handler/author"
+	"bookstoreapi/internal/application/handler/category"
 	"bookstoreapi/internal/application/handler/misc"
 	"bookstoreapi/internal/application/middleware"
 	"log"
@@ -11,11 +12,14 @@ import (
 // Must handle all trafic of API
 func HandleRequests() {
 	route("/health", misc.HealthCheck)
+
 	route("/authors/list", author.ListAuthors)
 	route("/authors/get/", author.GetAuthor)
 	route("/authors/new", author.NewAuthor)
 	route("/authors/edit/", author.UpdateAuthor)
 	route("/authors/delete/", author.DeleteAuthor)
+
+	route("/categories/list", category.ListCategories)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
