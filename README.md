@@ -4,12 +4,13 @@
 
 ## Tecnical specification 🔍
 
-- Simple CRUD for three repositories
+- Simple CRUD for three repositories:
   - Authors
   - Categories
   - Books
-- Used the relational Database MySQL for this
-- All application environment is encapsuled into docker (see `docker` folder to understand)
+- Used the relational Database MySQL for this.
+- The application structure is built based on DDD (Domain-driven design) pattern.
+- All application environment is encapsuled into docker (see `build` folder to understand).
 
 ## Project set-up 🏗️
 
