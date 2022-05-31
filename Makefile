@@ -1,7 +1,7 @@
 .SILENT: migrateup
 .SILENT: migratedown
 up:
-	docker-compose --file build/docker-composer.yml up -d
+	docker-compose --file build/docker-composer.yml up -d && docker exec -it bookstore_api bash
 down:
 	docker-compose --file build/docker-composer.yml down
 migrateup:
