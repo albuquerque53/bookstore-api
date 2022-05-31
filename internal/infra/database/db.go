@@ -16,8 +16,6 @@ func NewDatabaseManager() *DatabaseManager {
 }
 
 func (dm *DatabaseManager) Query(ctx context.Context, q string, args ...interface{}) (*sql.Rows, error) {
-	defer dm.DB.Close()
-
 	stmt, err := dm.DB.Prepare(q)
 
 	if err != nil {
@@ -30,8 +28,6 @@ func (dm *DatabaseManager) Query(ctx context.Context, q string, args ...interfac
 }
 
 func (dm *DatabaseManager) QueryRow(ctx context.Context, q string, args ...interface{}) (*sql.Row, error) {
-	defer dm.DB.Close()
-
 	stmt, err := dm.DB.Prepare(q)
 
 	if err != nil {
