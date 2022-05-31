@@ -13,6 +13,7 @@
 - Used the relational Database MySQL for this (see the [ER Diagram here](.github/bookstore_db.png)).
 - The application structure is built based on DDD (Domain-driven design) pattern.
 - All application environment is encapsuled into docker (see [build folder](build/) to understand).
+- This API have a Swagger/Open API documentation, [take a look here](doc/swagger.yaml).
 
 ## Project set-up 🏗️
 
