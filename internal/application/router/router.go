@@ -27,6 +27,7 @@ func HandleRequests() {
 	route("/categories/delete/", category.DeleteCategory)
 
 	route("/books/list", book.ListBooks)
+	route("/books/get/", book.GetBook)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
