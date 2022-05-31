@@ -149,5 +149,5 @@ func getCategoryEntity(mock *RepoMock) *CategoryEntity {
 }
 
 func buildExpectDto(id int) *CategoryDto {
-	return &CategoryDto{ID: id, Name: "test_author", CreatedAt: "2022-05-29 11:46:50", UpdatedAt: "2022-05-29 11:46:50"}
+	return &CategoryDto{ID: id, Name: "test_category", CreatedAt: "2022-05-29 11:46:50", UpdatedAt: "2022-05-29 11:46:50"}
 }
