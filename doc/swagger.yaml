@@ -1,0 +1,252 @@
+openapi: 3.0.0
+info:
+  title: BookStore API
+  version: 1.0.0
+servers:
+  - url: http://localhost:2001
+tags:
+  - name: Misc
+  - name: Author
+  - name: Category
+  - name: Book
+paths:
+  /health:
+    get:
+      tags:
+        - Misc
+      summary: Health Check
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authors/list:
+    get:
+      tags:
+        - Author
+      summary: List Authors
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authors/get/2:
+    get:
+      tags:
+        - Author
+      summary: Get Author
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authors/new:
+    post:
+      tags:
+        - Author
+      summary: New Author
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: J.R.R Tolkien
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authors/edit/2:
+    put:
+      tags:
+        - Author
+      summary: Edit Author
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Robert C. Martin
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authors/delete/2:
+    delete:
+      tags:
+        - Author
+      summary: Delete Author
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /categories/list:
+    get:
+      tags:
+        - Category
+      summary: List Categories
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /categories/get/3:
+    get:
+      tags:
+        - Category
+      summary: Get Category
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /categories/new:
+    post:
+      tags:
+        - Category
+      summary: New Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Drama
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /categories/edit/3:
+    put:
+      tags:
+        - Category
+      summary: Edit Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Fantasy
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /categories/delete/1:
+    delete:
+      tags:
+        - Category
+      summary: Delete Category
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /books/list:
+    get:
+      tags:
+        - Book
+      summary: List Books
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /books/get/1:
+    get:
+      tags:
+        - Book
+      summary: Get Book
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /books/new:
+    post:
+      tags:
+        - Book
+      summary: New Book
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Sample book
+                author_id: 1
+                category_id: 3
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /books/edit/1:
+    put:
+      tags:
+        - Book
+      summary: Edit Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: The Hobbit
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /books/delete/2:
+    delete:
+      tags:
+        - Book
+      summary: Delete Category
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
