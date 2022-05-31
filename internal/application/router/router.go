@@ -30,6 +30,7 @@ func HandleRequests() {
 	route("/books/get/", book.GetBook)
 	route("/books/new", book.NewBook)
 	route("/books/edit/", book.UpdateBook)
+	route("/books/delete/", book.DeleteBook)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
