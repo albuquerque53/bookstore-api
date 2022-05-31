@@ -2,6 +2,8 @@
 
 > An API for a fictionary library's management
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=BookStore%20API&uri=https%3A%2F%2Fgithub.com%2Falbuquerque53%2Fbookstore-api%2Fblob%2Fmain%2Fdoc%2Finsomnia.json)
+
 ## Tecnical specification 🔍
 
 - Simple CRUD for three repositories:
