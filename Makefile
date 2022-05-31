@@ -12,6 +12,8 @@ status:
 	docker-compose --file build/docker-composer.yml ps
 api:
 	docker exec -it bookstore_api bash
+install:
+	go mod tidy && go mod vendor
 test:
 	go test ./... 
 serve:
