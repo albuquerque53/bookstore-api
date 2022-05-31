@@ -28,6 +28,7 @@ func HandleRequests() {
 
 	route("/books/list", book.ListBooks)
 	route("/books/get/", book.GetBook)
+	route("/books/new", book.NewBook)
 
 	log.Fatal(http.ListenAndServe(":2001", nil))
 }
