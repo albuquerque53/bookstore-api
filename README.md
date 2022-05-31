@@ -14,16 +14,18 @@
 
 ## Project set-up 🏗️
 
-1. Build the containers:
+0. Create the `.env` file inside `build` folder with your local configurations (you must use the `.env.example` as base)
+
+1. Build the environment and get into API container:
 
 ```
 make up
 ```
 
-2. Get into API container:
+2. Install the dependencies:
 
 ```
-make api
+make install
 ```
 
 3. Run the tests to make sure that everyting's all right:
@@ -43,5 +45,3 @@ make migrateup
 ```
 make serve
 ``` 
-
-6. The application is running on the default port `2001` in `localhost`
