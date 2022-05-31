@@ -8,9 +8,9 @@
   - Authors
   - Categories
   - Books
-- Used the relational Database MySQL for this.
+- Used the relational Database MySQL for this (see the [ER Diagram here](.github/bookstore_db.png)).
 - The application structure is built based on DDD (Domain-driven design) pattern.
-- All application environment is encapsuled into docker (see `build` folder to understand).
+- All application environment is encapsuled into docker (see [build folder](build/) to understand).
 
 ## Project set-up 🏗️
 
