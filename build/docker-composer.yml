@@ -5,7 +5,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./docker
-      target: dev
     container_name: bookstore_api
     working_dir: /opt/app/api
     volumes:

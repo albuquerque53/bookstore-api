@@ -17,7 +17,7 @@
 
 ## Project set-up 🏗️
 
-0. Create the `.env` file inside `build` folder with your local configurations (you must use the `.env.example` as base)
+0. Create the `.env` file inside root (you must use the `.env.example` as base)
 
 1. Build the environment and get into API container:
 
