@@ -17,7 +17,11 @@
 
 ## Project set-up 🏗️
 
-0. Create the `.env` file inside root (you must use the `.env.example` as base)
+0. Create the `.env` file inside root (you must use the `.env.example` as base):
+
+```
+cp .env.example .env
+```
 
 1. Build the environment and get into API container:
 
